@@ -1,0 +1,7 @@
+.git/
+.vs/
+bin/
+obj/
+Infrastructure/.terraform
+Infrastructure/terraform.tfstate
+Infrastructure/terraform.tfstate.backup

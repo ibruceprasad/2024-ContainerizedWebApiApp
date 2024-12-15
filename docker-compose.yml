@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+
+  gardenmanagement:
+    image: ${DOCKER_REGISTRY-}gardenmanagement
+    build:
+      context: .
+      dockerfile: GardenManagement/Dockerfile
+    ports:
+      - "6001:6001"
+    environment:
+      - ASPNETCORE_URLS=http://*:6001
+    depends_on: [gardendbmssql, seqlogs]
+
+  gardendbmssql:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: gardendb
+    hostname: gardendbmssqlserver
+    environment:
+      - SA_PASSWORD=P@ssword1
+      - ACCEPT_EULA=Y
+    restart: unless-stopped
+    ports:
+      - "1400:1433"
+  seqlogs:
+    image: datalust/seq
+    restart: unless-stopped
+    ports:
+      - "5333:80"
+    environment:
+      - ACCEPT_EULA=Y
