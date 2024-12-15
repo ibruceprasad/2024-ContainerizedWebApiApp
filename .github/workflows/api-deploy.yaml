@@ -4,7 +4,7 @@ name: Build and Deploy API to Azure
 on:
   push:
     branches:
-      - main
+      - develop
 
 # workflow of the pipeline    
 jobs:
