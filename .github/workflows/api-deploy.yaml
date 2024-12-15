@@ -17,7 +17,7 @@ jobs:
         id: github
         uses: actions/checkout@v3
         
-      - name: Setup WebApi .NET
+      - name: Setup WebApi .NET on VM
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '8.0.x'
@@ -28,3 +28,8 @@ jobs:
           login-server: ${{ vars.ACR_SERVER }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
+      - name: Set SHA Output
+        id: set_sha
+        run: echo "sha=$(echo ${{ github.sha }} )" >> $GITHUB_OUTPUT
+      - name: Use SHA Output
+        run: echo "The commit SHA is ${{ steps.set_sha.outputs.sha }}"
