@@ -9,10 +9,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Garden.Management/GardenManagement.csproj", "Garden.Management/"]
+COPY ["GardenManagement/GardenManagement.csproj", "GardenManagement/"]
 RUN dotnet restore "./GardenManagement/./GardenManagement.csproj"
 COPY . .
-WORKDIR "/src/Garden.Management"
+WORKDIR "/src/GardenManagement"
 RUN dotnet build "./GardenManagement.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
