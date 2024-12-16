@@ -77,7 +77,7 @@ jobs:
           IMAGE_TAG: ${{ needs.build-create-push-to-ACR.outputs.sha }}
           PROJECT_NAME: ${{ needs.build-create-push-to-ACR.outputs.projectname }}
           ACR_SERVER: ${{ vars.ACR_SERVER }}
-          $DBCONNECTION_STRING: ${{ vars.DBCONNECTION_STRING }}
+          $DBCONNECTION_STRING: ${{ vars.DBCONNECTION_STRING1 }}
         with:
           registryUrl: ${{ vars.ACR_SERVER }}
           imageToDeploy: $ACR_SERVER/$PROJECT_NAME:$IMAGE_TAG

@@ -14,6 +14,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\api-deploy.yaml = .github\workflows\api-deploy.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1E9CDC97-2CD3-4046-A616-58055A432273}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\resoucegroup.tf = Infrastructure\resoucegroup.tf
+		Infrastructure\resources.tf = Infrastructure\resources.tf
+		Infrastructure\setup.tf = Infrastructure\setup.tf
+		Infrastructure\vars.tf = Infrastructure\vars.tf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
