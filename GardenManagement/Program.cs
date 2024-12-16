@@ -32,6 +32,12 @@ if (app.Environment.IsDevelopment())
     */
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetService<GardenDbContext>();  
+    dbContext.Database.Migrate();
+}
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
