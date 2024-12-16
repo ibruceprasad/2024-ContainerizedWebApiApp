@@ -33,12 +33,18 @@ jobs:
         run: echo "sha=$(echo ${{ github.sha }} )" >> $GITHUB_OUTPUT
       - name: Use SHA Output
         run: echo "The commit SHA is ${{ steps.set_sha.outputs.sha }}"
-      - name: Print name 
-        run: echo "project name is ${{ github.name }} )"
+      - name: Get Project Name from Directory
+        id: project_name
+        run: |
+            PROJECT_NAME=$(basename $PWD)
+            echo "project_name=$PROJECT_NAME" >> $GITHUB_OUTPUT
+      - name: Print Project Name
+        run: echo "The project name is ${{ steps.project_name.outputs.project_name }}"
       - name: Build and push Docker image to ACR
         env:
           IMAGE_NAME: ${{ vars.ACR_SERVER }}
           TAG_NAME: ${{ steps.vars.outputs.short_sha }}
+          PROJECT_NAME: ${{ steps.project_name.outputs.project_name }}
         run: |
-          docker build -f FormulaOne.Dockerfile -t $ACR_REGISTRY/f1app:$TAG_NAME -t $ACR_REGISTRY/f1app:latest .
-          docker push $ACR_REGISTRY/f1app --all-tags
+          docker build -f GardenManagement.Dockerfile  -t $IMAGE_NAME/$PROJECT_NAME:latest -t $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME  .
+          docker push $IMAGE_NAME/$PROJECT_NAME --all-tags
