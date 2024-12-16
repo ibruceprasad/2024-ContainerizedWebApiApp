@@ -48,5 +48,5 @@ jobs:
         run: |
           echo $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME
           echo "$IMAGE_NAME/$PROJECT_NAME:$TAG_NAME"
-          docker build -f GardenManagement.Dockerfile  -t $IMAGE_NAME/$PROJECT_NAME:latest -t $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME  .
+          docker build -f GardenManagement/Dockerfile  -t $IMAGE_NAME/$PROJECT_NAME:latest -t $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME  .
           docker push $IMAGE_NAME/$PROJECT_NAME --all-tags
