@@ -43,7 +43,7 @@ jobs:
       - name: Create docker image  and push it  to ACR
         env:
           IMAGE_NAME: ${{ vars.ACR_SERVER }}
-          TAG_NAME: ${{ steps.set_sha.outputs.sha }}"
+          TAG_NAME: ${{ steps.set_sha.outputs.sha }}
           PROJECT_NAME: ${{ steps.project_name.outputs.project_name }}
         run: |
           echo $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME
