@@ -84,4 +84,4 @@ jobs:
           containerAppEnvironment: g-containerappenv-dev
           resourceGroup: gardenmanagement-rg
           environmentVariables: |
-            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080 #ConnectionStrings__DefaultConnectionMsSql=$PASSWORD
+            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080  #ConnectionStrings__DefaultConnectionMsSql=$PASSWORD
