@@ -74,7 +74,7 @@ jobs:
           IMAGE_TAG: ${{ needs.build-create-push-to-ACR.outputs.sha }}
           PROJECT_NAME: ${{ needs.build-create-push-to-ACR.outputs.projectname }}
           ACR_SERVER: ${{ vars.ACR_SERVER }}
-          #PASSWORD: ${{ secrets.DB_CONN }}
+          $DBCONNECTION_STRING: ${{ secrets.DBCONNECTION_STRING }}
         with:
           registryUrl: ${{ vars.ACR_SERVER }}
           imageToDeploy: $ACR_SERVER/$PROJECT_NAME:$IMAGE_TAG
@@ -83,5 +83,5 @@ jobs:
           containerAppName: g-containerapp-dev
           containerAppEnvironment: g-containerappenv-dev
           resourceGroup: gardenmanagement-rg
-          environmentVariables: |
-            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080  #ConnectionStrings__DefaultConnectionMsSql=$PASSWORD
+          environmentVariables: |# for swagger 
+            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080   ConnectionStrings__GardenDbConnectionString=$DBCONNECTION_STRING
