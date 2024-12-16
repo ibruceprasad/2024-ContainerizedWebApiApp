@@ -46,5 +46,7 @@ jobs:
           TAG_NAME: ${{ steps.vars.outputs.short_sha }}
           PROJECT_NAME: ${{ steps.project_name.outputs.project_name }}
         run: |
+          echo $IMAGE_NAME/$PROJECT_NAME:latest
+          echo "$IMAGE_NAME/$PROJECT_NAME:latest"
           docker build -f GardenManagement.Dockerfile  -t $IMAGE_NAME/$PROJECT_NAME:latest -t $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME  .
           docker push $IMAGE_NAME/$PROJECT_NAME --all-tags
