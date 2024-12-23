@@ -12,7 +12,7 @@ namespace Garden.Management.Controllers
     public class PlantController : ControllerBase
     {
         private readonly GardenDbContext _gardenDbContext;
-        public PlantController(GardenDbContext gardenDbContext) 
+        public PlantController(GardenDbContext gardenDbContext)
         {
             _gardenDbContext = gardenDbContext;
         }
@@ -22,10 +22,9 @@ namespace Garden.Management.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IList<Plant>>> GetAllPlants()
         {
-            var plants = await _gardenDbContext.Plants.Select(x=> new PlantDto() { Name=  x.Name }).ToListAsync();
+            var plants = await _gardenDbContext.Plants.Select(x => new PlantDto() { Name = x.Name }).ToListAsync();
             return Ok(plants);
         }
     }
-
 }
 
