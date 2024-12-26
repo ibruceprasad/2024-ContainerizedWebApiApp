@@ -69,7 +69,7 @@ jobs:
           creds: ${{ secrets.SERVICE_PRINCIPAL }}
 
       - name: DBConnection string
-        run: echo "The commit SHA is ${{ vars.DBCONNECTION_STRING1 }}"
+        run: echo The commit SHA is ${{ vars.DBCONNECTION_STRING1 }}
           
       - name: build and deploy to ACA
         uses: azure/container-apps-deploy-action@v1
