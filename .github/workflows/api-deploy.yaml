@@ -43,7 +43,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Build
-        run: dotnet build --configuration Release 
+        run: dotnet build GardenManagement.sln --configuration Release 
           
       - name: Log in Azure ACR
         uses: azure/docker-login@v2
