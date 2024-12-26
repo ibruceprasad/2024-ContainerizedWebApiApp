@@ -13,14 +13,14 @@ The project includes:
    b) deploying the image to ACA.<br>
  
 <br>
-Project structure:
+
 <br>
 
-
-![image](https://github.com/user-attachments/assets/d4d7aecb-93b1-4f30-9133-6d38d06d5560)
-<br>
 
 Github Action workflow: <br>
 
 ![image](https://github.com/user-attachments/assets/0431ec7f-0599-4ee7-8d0e-111cea732313)
-
+<br><br>
+Project structure:<br><br>
+![image](https://github.com/user-attachments/assets/d4d7aecb-93b1-4f30-9133-6d38d06d5560)
+<br>
