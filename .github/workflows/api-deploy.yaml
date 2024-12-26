@@ -80,7 +80,7 @@ jobs:
           DBCONNECTION: ${{ vars.DBCONNECTION_STRING1 }}
         with:
           imageToDeploy: $ACR_SERVER/$PROJECT_NAME:$IMAGE_TAG
-          resourceGroup: gardenmanagement-rg
+          resourceGroup: gardenmanagement-rg-v2
           registryUrl: ${{ vars.ACR_SERVER }}
           targetPort: 8080
           ingress: external
