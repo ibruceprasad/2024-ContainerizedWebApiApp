@@ -87,4 +87,4 @@ jobs:
           containerAppName: g-containerapp-dev
           containerAppEnvironment: g-containerappenv-dev
           environmentVariables: |# for swagger 
-            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080   #ConnectionStrings__GardenDbConnectionString=$DBCONNECTION
+            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080 ConnectionStrings__GardenDbConnectionString=$DBCONNECTION
