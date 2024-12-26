@@ -6,36 +6,27 @@ on:
     branches:
       - develop
 
+
 # workflow 1, build, create and push image to registry ACR    
 jobs:
   build-create-push-to-ACR:
     runs-on: ubuntu-latest
     outputs:
-      sha: ${{ steps.set_sha.outputs.sha }}  # for workflow 2 use
+      sha: ${{ steps.shaval.outputs.sha }}  # for workflow 2 use
       projectname: ${{ steps.project_name.outputs.project_name }}
+
     steps:
+    
       - name: Checkout repository
         id: github
-        uses: actions/checkout@v3
-        
-      - name: Setup WebApi .NET on VM
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '8.0.x'
-          
-      - name: Configure Azure ACR
-        uses: azure/docker-login@v2
-        with:
-          login-server: ${{ vars.ACR_SERVER }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+        uses: actions/checkout@v4
 
       - name: Set SHA Output
-        id: set_sha
+        id: shaval
         run: echo "sha=$(echo ${{ github.sha }} )" >> $GITHUB_OUTPUT
 
-      - name: Use SHA Output
-        run: echo "The commit SHA is ${{ steps.set_sha.outputs.sha }}"
+      - name: print shaval
+        run: echo "The commit SHA is ${{ steps.shaval.outputs.sha }}"
 
       - name: Get Project Name from Directory
         id: project_name
@@ -45,17 +36,42 @@ jobs:
 
       - name: Print Project Name
         run: echo "The project name is ${{ steps.project_name.outputs.project_name }}"
+        
+      - name: Setup WebApi .NET on GitHub Action vm/container
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build
+        run: donet build --configuration Release 
+          
+      - name: Log in Azure ACR
+        uses: azure/docker-login@v2
+        with:
+          login-server: ${{ vars.ACR_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Create docker image  and push it  to ACR
         env:
-          IMAGE_NAME: ${{ vars.ACR_SERVER }}
-          TAG_NAME: ${{ steps.set_sha.outputs.sha }}
+          REGISTRY: ${{ vars.ACR_SERVER }}
           PROJECT_NAME: ${{ steps.project_name.outputs.project_name }}
-        run: |
-          echo $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME
-          echo "$IMAGE_NAME/$PROJECT_NAME:$TAG_NAME"
-          docker build -f GardenManagement/Dockerfile  -t $IMAGE_NAME/$PROJECT_NAME:latest -t $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME  .
-          docker push $IMAGE_NAME/$PROJECT_NAME --all-tags
+          TAG_NAME: ${{ steps.shaval.outputs.sha }}
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: $REGISTRY/$PROJECT_NAME:$TAG_NAME
+          file: GardenManagement/Dockerfile
+          
+        #run: |
+        #  echo $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME
+        #  echo "$IMAGE_NAME/$PROJECT_NAME:$TAG_NAME"
+        #  docker build -f GardenManagement/Dockerfile  -t $IMAGE_NAME/$PROJECT_NAME:latest -t $IMAGE_NAME/$PROJECT_NAME:$TAG_NAME  .
+        #  docker push $IMAGE_NAME/$PROJECT_NAME --all-tags
+
+
+
+
 
 # workflow 2, wait for workflow 1 to complete. Deploy the container to Azure Container App 
   deploy-container-to-ACA:
