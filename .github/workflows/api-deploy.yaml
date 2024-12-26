@@ -79,12 +79,12 @@ jobs:
           ACR_SERVER: ${{ vars.ACR_SERVER }}
           DBCONNECTION: ${{ vars.DBCONNECTION_STRING1 }}
         with:
-          registryUrl: ${{ vars.ACR_SERVER }}
           imageToDeploy: $ACR_SERVER/$PROJECT_NAME:$IMAGE_TAG
+          resourceGroup: gardenmanagement-rg
+          registryUrl: ${{ vars.ACR_SERVER }}
           targetPort: 8080
           ingress: external
           containerAppName: g-containerapp-dev
           containerAppEnvironment: g-containerappenv-dev
-          resourceGroup: gardenmanagement-rg
           environmentVariables: |# for swagger 
-            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080   ConnectionStrings__GardenDbConnectionString=$DBCONNECTION
+            ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080   #ConnectionStrings__GardenDbConnectionString=$DBCONNECTION
