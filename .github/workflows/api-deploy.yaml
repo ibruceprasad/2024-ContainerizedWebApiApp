@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{REGISTRY}}/${{PROJECT_NAME}}-${{TAG_NAME}}
+          tags: ${{ vars.ACR_SERVER }}/${{ steps.project_name.outputs.project_name }}-${{ steps.shaval.outputs.sha }}
           file: GardenManagement/Dockerfile
           
         #run: |
