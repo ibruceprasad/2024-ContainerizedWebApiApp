@@ -25,11 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    // This needed the database should be pre-existed . Commented below code as it gets invoked each call
-    /*using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<GardenDbContext>();
-    db.Database.Migrate();
-    */
+
 }
 
 using (var scope = app.Services.CreateScope())

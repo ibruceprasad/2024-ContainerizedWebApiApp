@@ -25,6 +25,7 @@ namespace Garden.Management.Infrastructure
                .UsingEntity(j => j.ToTable("KeeperPlantChart"));
 
             base.OnModelCreating(modelBuilder);
+
             // Removed this code - As data tried to get added each call.
             /*
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(GardenDbContext).Assembly);
