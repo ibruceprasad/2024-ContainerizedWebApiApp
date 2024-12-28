@@ -1,4 +1,4 @@
-# Dockerized Web API and database <span>#</span>
+# Containerized Web API and database <span>#</span>
 
 
 This project demonstrates how to containerize a .NET Web API application and its backend database, then deploy it to a containerized platform, Azure Container Apps (ACA), using a GitHub Actions CI/CD pipeline
